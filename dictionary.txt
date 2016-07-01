@@ -6,5 +6,8 @@ Haw'd	hh ao1 d
 Hey'd	hh ey1 d
 bawn	b ao1 n
 bla bla bla
+<<<<<<< HEAD
 testing
 this one is better
+=======
+>>>>>>> parent of fe11aca... added testing
