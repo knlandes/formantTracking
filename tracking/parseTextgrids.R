@@ -4,10 +4,10 @@
 ##
 
 # paths
-files = list.files('../textgrids', full.name = TRUE)
+files = list.files('textgrids', full.name = TRUE)
 
 # filename for writing out
-outfile = list.files('../textgrids', full.name = FALSE)
+outfile = list.files('textgrids', full.name = FALSE)
 outfile = paste(strsplit(outfile,split='\\.')[[1]][1],'.csv',sep='')
 
 # text line by line
