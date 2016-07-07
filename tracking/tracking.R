@@ -20,6 +20,7 @@ fs=22050
 i = 11
 span = (dat[i,2]*fs):(dat[i,3]*fs)
 tmp = wav$sound[span]
+play (tmp, fs = fs)
 
 
 cutoffs = seq(5000,8000,length.out=6)
