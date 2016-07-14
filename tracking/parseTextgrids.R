@@ -12,11 +12,11 @@ outfile = paste(strsplit(outfile,split='\\.')[[1]][1],'.csv',sep='')
 
 # text line by line
 txt = readLines (files[1])
-str (txt) ## 2788 length character vector
+str (txt) ## 2988 length character vector
 
 # number of segments (including silence and so on)
-n = as.numeric (strsplit (txt[14], split = '=')[[1]][2])
-steps = seq (16,4*n+15,4)
+n = as.numeric (strsplit (txt[14], split = '=')[[1]][2]) #n = 500
+steps = seq (16,4*n+15,4) #sequence starting at 16, ending at 2015, counting in steps of 4, (meaning it ends at 2012)
 
 starts=NULL
 for (i in 1:length(steps)){
@@ -39,8 +39,9 @@ for (i in 1:length(steps)){
 }
 dat = data.frame (phon = phon, start = starts, end = ends)
 
-n = as.numeric (strsplit (txt[max(steps)+8], split = '=')[[1]][2])
-steps = seq (max(steps+10),4*n+max(steps+9),4)
+#number of words
+n = as.numeric (strsplit (txt[max(steps)+8], split = '=')[[1]][2]) #line 2020, max() finds the peak value, in this case 2012 (plus an additional 8). n is now 242
+steps = seq (max(steps+10),4*n+max(steps+9),4) #redefines steps as sequence starting from 2022, ending at 2989, counting by 4 (the start times of words)
 
 wstarts=NULL
 for (i in 1:length(steps)){
