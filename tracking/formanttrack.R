@@ -1,7 +1,7 @@
 
 
 formanttrack = function (sound, timestep = 5, windowlength = 30, formants = 5, cutoff = 5000, 
-minformant = 200, maxbw = 600, fs = 22050, show = TRUE, periodicity = .5, returnbw = FALSE){
+minformant = 200, maxbw = 600, fs = 22050, show = TRUE, periodicity = .5, returnbw = FALSE,color=FALSE){
 
   if (class(sound) == "ts") fs = frequency(sound)
   if (class(sound) == "sound") {
@@ -48,7 +48,7 @@ minformant = 200, maxbw = 600, fs = 22050, show = TRUE, periodicity = .5, return
     tmp = data.frame (ffs)
   
   if (show == TRUE){
-    spectrogram (sound, colors = FALSE, quality = FALSE, fs = fs,timestep=-200,maxfreq=cutoff)
+    spectrogram (sound, colors = color, quality = FALSE, fs = fs,timestep=-200,maxfreq=cutoff)
     for (i in 2:(formants+1)) points (ffs[ffs[,i]!=0,1], ffs[ffs[,i]!=0,i], pch = 16, col = 'white', cex = 2.1)
     for (i in 2:(formants+1)) points (ffs[ffs[,i]!=0,1], ffs[ffs[,i]!=0,i], pch = 16, col = i-1, cex = 1.5)
   }
