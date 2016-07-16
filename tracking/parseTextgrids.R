@@ -80,7 +80,14 @@ for (j in 1:length (files)){
     dat$wstart[use] = wdat$wstart[i]
   }
   
-  # save as csv file
+  vowels = c('AA1','AE1','AH1','AO1','AW1','AY1','EH1',
+             'ER1','EY1','IH1','IY1','OW1','OY1','UH1','UW1')
+  womit = c('THE','WORD','IS')
+  
+  dat = dat[dat$phon %in% vowels & !(dat$word %in% womit),]     # select only those rows with a phon in the set of vowels
+  colnames(dat)[1]='vowel' 
+
+    # save as csv file
   fname = paste ('csvs/',outfile,sep='')
-  write.csv (dat, fname)
+  write.csv (dat, fname, row.names=FALSE)
 }

@@ -77,3 +77,43 @@ lpc = function (sound, order = round(fs/1000)+3, fs = 10000, show = FALSE, add =
 
 
 
+tmp = tmp[4000:6000]
+tmp = resample (tmp, 10000, 22050)
+fs = 10000
+
+plot(tmp)
+
+n=length(tmp)
+wn = 8/(1000/fs)
+step = 2/(1000/fs)
+phasestep = (2*pi)*(2/1000)
+
+spots = seq (1+step,n-wn,step)
+i = spots[1]
+sp = fft (tmp[span])
+startangs = atan2 (Im(sp),Re(sp))
+ft = sp
+count = 1
+for (i in spots){
+  span = i:(i+wn-1) 
+  sp = fft (tmp[span])
+  angs = atan2 (Im(sp),Re(sp))
+  
+  sp2 = rotate(sp, +(phasestep*count))
+  ft = ft * sp2
+  count = count + 1
+}
+
+par (mfrow = c(2,1),mar=c(4,4,1,1))
+spectralslice(tmp[span])
+tmpp = log(abs(ft[1:(wn/2)]))
+plot (tmpp - max(tmpp), type = 'l',xaxs='i')
+
+
+sp2 = rotate(sp, angs)
+
+sp2[1]
+
+
+
+
