@@ -8,9 +8,21 @@
 #cutoffs = c(4000,7000);i=1;j=1;windowlength=30;rows = 1:nrow(csv);makepdf = FALSE;size=c(1200,600);
 
 
+################################################################
+#### PARAMETERS
+#sound - the sound being analyzed
+#csv - the data read in from a csv file
+#rows - whichs rows will be tracked? 
+#cutoffs - upper and lower bounds for cutoffs
+#color - color scheme for spectrograms. FALSE for black/white, TRUE for regular
+#windowlength - window length in milliseconds for lpc analysis
+#makepng - TRUE/FALSE makes png figures instead of plots
+#size - size of plots in pixels
+#speaker - speaker number needed for making plots
+################################################################
 
 selectCutoff = function (sound, csv, rows = NULL, cutoffs = c(4000,7000),color='alternate',
-                         windowlength=25, f0=NULL, makepng = FALSE, size=c(1200,600), speaker = 0){
+                         windowlength=25, makepng = FALSE, size=c(1200,600), speaker = 0){
   
   source ('tracking/formanttrack.R')
   if (is.null(rows)) rows = 1:nrow(csv) 
@@ -44,7 +56,7 @@ selectCutoff = function (sound, csv, rows = NULL, cutoffs = c(4000,7000),color='
       tmp = scan (what=character(), n=1,quiet = TRUE)
       if (!(tmp %in% c('1','2','3','4','5','6'))) stop ('User Exit')
       tmp = as.numeric (tmp)
-      best[j] = tmp    
+      best[count] = tmp    
       ffs[[count]] = tffs[[tmp]]
       count = count+1
     }
